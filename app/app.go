@@ -7,7 +7,7 @@ import (
 	"../controllers"
 )
 
-func StartApp()  {
+func StartApp() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	http.HandleFunc("/users", controllers.GetUser)

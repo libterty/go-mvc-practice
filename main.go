@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func main()  {
+func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	app.StartApp()

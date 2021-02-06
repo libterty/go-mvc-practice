@@ -9,14 +9,14 @@ import (
 	"../utils"
 )
 
-func GetUser(res http.ResponseWriter, req *http.Request)  {
-	userIdParam := req.URL.Query().Get( "user_id")
+func GetUser(res http.ResponseWriter, req *http.Request) {
+	userIdParam := req.URL.Query().Get("user_id")
 	userId, err := strconv.ParseInt(userIdParam, 10, 64)
 	if err != nil {
 		appErr := &utils.ApplicationError{
-			Message: "User id must be a number",
+			Message:    "User id must be a number",
 			StatusCode: http.StatusBadRequest,
-			Code: "bad_request",
+			Code:       "bad_request",
 		}
 		errValue, _ := json.Marshal(appErr)
 		res.WriteHeader(appErr.StatusCode)
@@ -27,9 +27,9 @@ func GetUser(res http.ResponseWriter, req *http.Request)  {
 	user, apiErr := services.GetUser(userId)
 	if apiErr != nil {
 		appErr := &utils.ApplicationError{
-			Message: "User not found",
+			Message:    "User not found",
 			StatusCode: http.StatusNotFound,
-			Code: "not_found",
+			Code:       "not_found",
 		}
 		errValue, _ := json.Marshal(appErr)
 		res.WriteHeader(appErr.StatusCode)
