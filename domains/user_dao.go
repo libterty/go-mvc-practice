@@ -16,9 +16,20 @@ var (
 			Email:     "lib@test.com",
 		},
 	}
+	UserDao userDaoInterface
 )
 
-func GetUser(userId int64) (*User, *utils.ApplicationError) {
+func init()  {
+	UserDao = &userDao{}
+}
+
+type userDaoInterface interface {
+	GetUser(int64) (*User, *utils.ApplicationError)
+}
+
+type userDao struct {}
+
+func (u *userDao) GetUser(userId int64) (*User, *utils.ApplicationError) {
 	user := users[userId]
 	if user == nil {
 		return nil, &utils.ApplicationError{
