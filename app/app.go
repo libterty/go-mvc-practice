@@ -1,18 +1,24 @@
 package app
 
 import (
+	"github.com/gin-gonic/gin"
 	"log"
-	"net/http"
-
-	"../controllers"
 )
+
+var (
+	router *gin.Engine
+)
+
+func init()  {
+	router = gin.Default()
+}
 
 func StartApp() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
-	http.HandleFunc("/users", controllers.GetUser)
+	mapUrls()
 
-	if err := http.ListenAndServe(":5050", nil); err != nil {
+	if err := router.Run(":5050"); err != nil {
 		//log.Fatalf("App Stop with: %v", err)
 		panic(err)
 	}
